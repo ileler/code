@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: coderr.kerwin.osgi.demo.model
+Bundle-SymbolicName: coderr.kerwin.osgi.demo.model
+Bundle-Version: 0.0.1.SNAPSHOT
+Excluded-Imports: coderr.kerwin.osgi.demo.model

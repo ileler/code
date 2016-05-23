@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>coderr.kerwin.osgi.demo</groupId>
+  <artifactId>coderr.kerwin.osgi.demo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>coderr.kerwin.osgi.demo</name>
+  
+  <modules>
+	<module>coderr.kerwin.osgi.demo.api</module>
+	<module>coderr.kerwin.osgi.demo.host</module>
+	<module>coderr.kerwin.osgi.demo.web</module>
+    <module>coderr.kerwin.osgi.demo.ds</module>
+	<module>coderr.kerwin.osgi.demo.impl1</module>
+	<module>coderr.kerwin.osgi.demo.impl2</module>
+	<module>coderr.kerwin.osgi.demo.mprdba</module>
+	<module>coderr.kerwin.osgi.demo.mprimpl</module>
+    <module>coderr.kerwin.osgi.demo.model</module>
+  </modules>
+</project>

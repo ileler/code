@@ -1,0 +1,79 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="./../../Resource/StyleSheet/Default.css" path="LEAP/Resource/StyleSheet/Default.css" rel="stylesheet" type="text/css" />
+	<script src="./../../Resource/JavaScript/Base.js"  path="LEAP/Resource/JavaScript/Base.js" def></script>
+	<script src="./dyxxinfo.js" path="LEAP/CSIP/dyxx/dyxxinfo.js" def></script>
+	<!--@ module = dyxxinfo -->
+</head>
+<DIV onresize=LEAPLG.bt(); class="lg_p2_bt lg_p2s_info" moduleversion="2" moduletype="tableinfo" modulecn="打印属性" module="iirprintproperties" modulewidth="600" moduleheight="800" autorefreshparentmodule="1" pagemodulepath="LEAP/CSIP/dyxx/dyxxinfo.html" pagemodule="dyxxinfo" pagemodulecn="打印信息">
+	<DIV style="POSITION: relative; WIDTH: 100%; OVERFLOW: auto" class="lg_p2_bt_top ">
+		<DIV class=lginfopanel>
+			<TABLE style="WIDTH: 100%" class=lg3table border=1 cellSpacing=0 cellPadding=0 istexttable="1">
+				<TBODY>
+					<TR style="DISPLAY: none">
+						<TD style="WIDTH: 85px" class=lg3tabletext></TD>
+						<TD class=lg3tablect></TD>
+						<TD style="WIDTH: 85px" class=lg3tabletext></TD>
+						<TD class=lg3tablect></TD>
+					</TR>
+					<TR>
+						<TD class=lg3tabletext>对象名<FONT color=#ff0000>*</FONT>
+						</TD>
+						<TD class=lg3tablect colspan="3">
+							<INPUT class=lginfoct check="maxlen:100,notnull:true" ht="input" mdcn="对象名" mdtype="text" bt="text" md="objname">
+						</TD>
+					</TR>
+					<TR>
+						<TD class=lg3tabletext>键<FONT color=#ff0000>*</FONT>
+						</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="maxlen:100,notnull:true" ht="input" mdcn="键" mdtype="text" bt="text" md="objkey">
+						</TD>
+						<TD class=lg3tabletext>值<FONT color=#ff0000>*</FONT>
+						</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="maxlen:100,notnull:true" ht="input" mdcn="值" mdtype="text" bt="text" md="objvalue">
+						</TD>
+					</TR>
+					<TR>
+						<TD class=lg3tabletext>X值</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="isint:true,maxlen:7" ht="input" mdcn="X值" mdtype="integer" bt="text" md="objx">
+						</TD>
+						<TD class=lg3tabletext>Y值</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="isint:true,maxlen:7" ht="input" mdcn="Y值" mdtype="integer" bt="text" md="objy">
+						</TD>
+					</TR>
+					<TR>
+						<TD class=lg3tabletext>字体</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="maxlen:100" ht="input" mdcn="字体" mdtype="text" bt="text" md="font">
+						</TD>
+						<TD class=lg3tabletext>是否粗体</TD>
+						<TD class=lg3tablect>
+							<DIV class="radio_frame lginfoct" check="isint:true,maxlen:7" ct="radio" bt="text" md="isbold" mdtype="radio" mdcn="是否粗体" code="lbcpboolean" dynacode="1">
+					   		</DIV>
+						</TD>
+					</TR>
+					<TR>
+						<TD class=lg3tabletext>字体大小</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="isint:true,maxlen:7" ht="input" mdcn="字体大小" mdtype="integer" bt="text" md="fontsize">
+						</TD>
+						<TD class=lg3tabletext>宽度</TD>
+						<TD class=lg3tablect>
+							<INPUT class=lginfoct check="isint:true,maxlen:7" ht="input" mdcn="宽度" mdtype="integer" bt="text" md="width">
+						</TD>
+					</TR> 
+				</TBODY>
+			</TABLE>
+		</DIV>
+	</DIV>
+	<DIV style="HEIGHT: 40px" onresize=LEAPLG.bt_layout(); class=lg_p2_bt_bottom>
+		<DIV class=lginfobtnpanel>
+			<A class="lgimgbtn lgimg_ok" href="javascript:" ut="submit" ht="button" bindevents="click=innerInfoSubmit">确定</A>
+		</DIV>
+	</DIV>
+	<IMG style="DISPLAY: none" onerror=LEAPLG.bt_img(0); src="data:image:png,base64">
+</DIV>

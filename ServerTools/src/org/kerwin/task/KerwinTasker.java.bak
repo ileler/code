@@ -1,0 +1,316 @@
+package org.kerwin.task;
+
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public abstract class KerwinTasker implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private String id;
+	private String name;
+	private int execCount;
+	private boolean status;
+	private String execTime;
+	private Date createtime;
+	private Date updatetime;
+	private Date lastExecTime;
+	private Date nextExecTime;
+	private String taskerClass;
+	private Date lastExecEndTime;
+	private String lastExecStatus;
+	private Date lastExecBeginTime;
+	private static SimpleDateFormat sdfymd;
+	private static SimpleDateFormat sdfymdhms;
+	
+	public abstract void updateKerwinTasker();
+	public abstract Date calculateNextExecTime() throws Exception;
+	
+	static{
+		sdfymd = new SimpleDateFormat("yyyy-MM-dd");
+		sdfymdhms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getExecTime() {
+		return execTime;
+	}
+	public void setExecTime(String execTime) {
+		if(execTime != null && !execTime.isEmpty()){
+			try {
+				if(sdfymdhms.parse(sdfymd.format(new Date()) + " " + execTime) != null){
+					this.execTime = execTime;
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public int getExecCount() {
+		return execCount;
+	}
+	public void setExecCount(int execCount) {
+		this.execCount = execCount;
+	}
+	public boolean getStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
+	public Date getLastExecTime() {
+		return lastExecTime;
+	}
+	public void setLastExecTime(Date lastExecTime) {
+		this.lastExecTime = lastExecTime;
+	}
+	public Date getNextExecTime() {
+		return nextExecTime;
+	}
+	public void setNextExecTime(Date nextExecTime) {
+		this.nextExecTime = nextExecTime;
+	}
+	public String getTaskerClass() {
+		return taskerClass;
+	}
+	public void setTaskerClass(String taskerClass) {
+		this.taskerClass = taskerClass;
+	}
+	public Date getLastExecEndTime() {
+		return lastExecEndTime;
+	}
+	public void setLastExecEndTime(Date lastExecEndTime) {
+		this.lastExecEndTime = lastExecEndTime;
+	}
+	public String getLastExecStatus() {
+		return lastExecStatus;
+	}
+	public void setLastExecStatus(String lastExecStatus) {
+		this.lastExecStatus = lastExecStatus;
+	}
+	public Date getLastExecBeginTime() {
+		return lastExecBeginTime;
+	}
+	public void setLastExecBeginTime(Date lastExecBeginTime) {
+		this.lastExecBeginTime = lastExecBeginTime;
+	}
+	
+	@Override
+	public String toString(){
+		return  "##############################\n"+
+				"#\tKerwinTasker:["+this.getName()+"]\n" +
+				"#\t\tid:                      "+this.getId()+"\n"+
+				"#\t\tname:                    "+this.getName()+"\n"+
+				"#\t\tstatus:                  "+this.getStatus()+"\n"+
+				"#\t\texecTime:                "+this.getExecTime()+"\n"+
+				"#\t\texecCount:               "+this.getExecCount()+"\n"+
+				"#\t\ttaskerClass:             "+this.getTaskerClass()+"\n"+
+				"#\t\tlastExecStatus:          "+this.getLastExecStatus()+"\n"+
+				"#\t\tlastExecTime:            "+KerwinTasker.getDatetime(this.getLastExecTime())+"\n"+
+				"#\t\tnextExecTime:            "+KerwinTasker.getDatetime(this.getNextExecTime())+"\n"+
+				"#\t\tlastExecBeginTime:       "+KerwinTasker.getDatetime(this.getLastExecBeginTime())+"\n"+
+				"#\t\tlastExecEndTime:         "+KerwinTasker.getDatetime(this.getLastExecEndTime())+"\n"+
+				"#\t\tcreatetime:              "+KerwinTasker.getDatetime(this.getCreatetime())+"\n"+
+				"#\t\tupdatetime:              "+KerwinTasker.getDatetime(this.getUpdatetime())+"\n"+
+				"##############################";
+	}
+	
+	public static Date getDatetime(String datetime){
+		try {
+			return (datetime != null && !datetime.isEmpty()) ? sdfymdhms.parse(datetime) : null;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String getDatetime(Date datetime){
+		return (datetime != null) ? sdfymdhms.format(datetime) : null;
+	}
+	
+	public static int compareDatetime(Date datetime){
+		return compareDatetime(KerwinTasker.getDatetime(datetime),sdfymdhms.format(new Date()));
+	}
+	
+	public static int compareDatetime(String datetime){
+		return compareDatetime(datetime,sdfymdhms.format(new Date()));
+	}
+	
+	public static int compareDatetime(String datetime1, String datetime2){
+		if(datetime1 == null || datetime1.isEmpty() || datetime2 == null || datetime2.isEmpty())	return -99;
+		try {
+			return sdfymdhms.parse(datetime1).compareTo(sdfymdhms.parse(datetime2));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}	
+		return -99;
+	}
+	
+	/**
+	 * @author kerwin
+	 * 任务类型：指定每天
+	 */
+	public static abstract class KerwinTaskerType1 extends KerwinTasker{
+		private static final long serialVersionUID = 1L;
+		@Override
+		public Date calculateNextExecTime() throws Exception{
+			if(super.execTime == null)	throw new Exception("execTime is null");
+			Date nextExecTime = sdfymdhms.parse(sdfymd.format(new Date()) + " " + super.execTime);
+			if(nextExecTime == null)	return null;
+			if(KerwinTasker.compareDatetime(nextExecTime) < 1){
+				Calendar c = Calendar.getInstance();
+				c.setTime(nextExecTime);
+		        c.add(Calendar.DAY_OF_YEAR, 1);
+				return c.getTime();
+			}
+			return nextExecTime;
+		}
+	}
+	
+	/**
+	 * @author kerwin
+	 * 任务类型：指定星期
+	 */
+	public static abstract class KerwinTaskerType2 extends KerwinTasker{
+		private static final long serialVersionUID = 1L;
+		private String weeks;
+		public String getWeeks() {
+			return weeks;
+		}
+		public void setWeeks(String weeks) {
+			this.weeks = weeks;
+		}
+		@Override
+		public Date calculateNextExecTime() {
+//			Arrays.asList(weeks.split(","))
+			return null;
+		}
+	}
+	
+	/**
+	 * @author kerwin
+	 * 任务类型：指定月日
+	 */
+	public static abstract class KerwinTaskerType3 extends KerwinTasker{
+		private static final long serialVersionUID = 1L;
+		private int month;
+		private int day;
+		public int getMonth() {
+			return month;
+		}
+		public void setMonth(int month) {
+			this.month = month;
+		}
+		public int getDay() {
+			return day;
+		}
+		public void setDay(int day) {
+			this.day = day;
+		}
+		@Override
+		public Date calculateNextExecTime() {
+//			if(KerwinTasker.compareDatetime(getExecTime()) && (month > 0) && (day > 0)){
+//				return Calendar.getInstance().get(Calendar.MONTH) == month && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == day ? true : false;
+//			}
+			return null;
+		}
+	}
+	
+	/**
+	 * @author kerwin
+	 * 任务类型：指定每号
+	 */
+	public static abstract class KerwinTaskerType4 extends KerwinTasker{
+		private static final long serialVersionUID = 1L;
+		private int day;
+		public int getDay() {
+			return day;
+		}
+		public void setDay(int day) {
+			this.day = day;
+		}
+		@Override
+		public Date calculateNextExecTime() {
+//			if(KerwinTasker.compareDatetime(getExecTime()) && (day > 0)){
+//				return Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == day ? true : false;
+//			}
+			return null;
+		}
+	}
+	
+	/**
+	 * @author kerwin
+	 * 任务类型：间隔时间
+	 */
+	public static abstract class KerwinTaskerType5 extends KerwinTasker{
+		private static final long serialVersionUID = 1L;
+		enum IntervalType{
+			H,M,S;
+		}
+		private IntervalType intervalType;
+		private int interval;
+		public IntervalType getIntervalType() {
+			return intervalType;
+		}
+		public void setIntervalType(IntervalType intervalType) {
+			this.intervalType = intervalType;
+		}
+		public int getInterval() {
+			return interval;
+		}
+		public void setInterval(int interval) {
+			this.interval = interval;
+		}
+		@Override
+		public Date calculateNextExecTime() {
+//			Calendar oc = Calendar.getInstance();
+//			Calendar nc = Calendar.getInstance();
+//			Date lastExecTime,updatetime,createtime;
+//			if((lastExecTime = getLastExecTime()) != null){
+//				nc.setTimeInMillis(lastExecTime.getTime());
+//			}else if((updatetime = getUpdatetime()) != null){
+//				nc.setTimeInMillis(updatetime.getTime());
+//			}else if((createtime = getCreatetime()) != null){
+//				nc.setTimeInMillis(createtime.getTime());
+//			}else{
+//				return false;
+//			}
+//			if(intervalType == IntervalType.H && (oc.getTimeInMillis() - nc.getTimeInMillis() >= interval * 60 * 60 * 1000)){
+//				return true;
+//			}else if(intervalType == IntervalType.M && (oc.getTimeInMillis() - nc.getTimeInMillis() >= interval * 60 * 1000)){
+//				return true;
+//			}else if(intervalType == IntervalType.S && (oc.getTimeInMillis() - nc.getTimeInMillis() >= interval * 1000)){
+//				return true;
+//			}else{
+//				return false;
+//			}
+			return null;
+		}
+	}
+	
+}

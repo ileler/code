@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: coderr.kerwin.osgi.demo.web
+Bundle-SymbolicName: coderr.kerwin.osgi.demo.web
+Bundle-Version: 0.0.1.SNAPSHOT
+Snap-Host: coderr.kerwin.osgi.demo.host;version="0.0.1.SNAPSHOT"  
+Snap-ContextPath: /gcode

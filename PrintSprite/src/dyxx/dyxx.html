@@ -1,0 +1,30 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="./../../Resource/StyleSheet/Default.css" path="LEAP/Resource/StyleSheet/Default.css" rel="stylesheet" type="text/css" />
+	<script src="./../../Resource/JavaScript/Base.js"  path="LEAP/Resource/JavaScript/Base.js" def></script>
+	<script src="./dyxx.js" path="LEAP/CSIP/dyxx/dyxx.js" def></script>
+	<!--@ module = dyxx -->
+</head>
+<DIV onresize=LEAPLG.tb(); class="lg_p2_tb lg_p2s_search" moduleversion="2" pagemodulepath="LEAP/CSIP/dyxx/dyxx.html" pagemodule="dyxx" pagemodulecn="打印配置">
+	<DIV style="HEIGHT: 45px" onresize=LEAPLG.tb_layout(0); class="lg_p2_tb_top lgsearchpanel">
+		<DIV class=lgbtncon>
+			<A class="lgimgbtn lgimg_reset" href="javascript:" style="width: 120px" ht="button" bindevents="click=saveBtnClicked">保存打印配置</A>
+			<A class="lgimgbtn lgimg_export1" href="javascript:" style="width: 120px" ut="print" status="1" ht="button" bindevents="click=print">准备打印证书</A>
+		</DIV>
+		<DIV class=lgbtncon>
+			<A class="lgimgbtn" href="javascript:" style="width: 120px; letter-spacing: 0px; padding-left: 0px; margin-left:16px; padding-top: 1px" ht="button">
+				<LABEL style="width:12px;">X:</LABEL>
+				<INPUT class=lgiact style="width:100px;display:inline;float:none" check="maxlen:10" ht="input" ut="xvalue" mdcn="X" mdtype="text" bt="text">
+			</A>
+			<A class="lgimgbtn" href="javascript:" style="width: 120px; letter-spacing: 0px; padding-left: 0px; margin-left:21px; padding-top: 1px" ht="button">
+				<LABEL style="width:12px;">Y:</LABEL>
+				<INPUT class=lgiact style="width:100px;display:inline;float:none" check="maxlen:10" ht="input" ut="yvalue" mdcn="Y" mdtype="text" bt="text">
+			</A>
+		</DIV>
+	</DIV>
+	<DIV class="lg_p2_tb_bottom lgresultpanel">
+		<DIV id="container" style="WIDTH: 100%; HEIGHT: 100%; TEXT-ALIGN: center; VERTICAL-ALIGN: middle; OVERFLOW: scroll;">
+		</DIV>
+	</DIV>
+	<IMG style="DISPLAY: none" onerror=LEAPLG.tb_img(0); src="data:image:png,base64">
+</DIV>

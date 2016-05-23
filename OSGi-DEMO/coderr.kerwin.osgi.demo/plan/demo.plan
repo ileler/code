@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="demo.plan" version="0.0.1.SNAPSHOT" scoped="false"
+	atomic="false" xmlns="http://www.eclipse.org/virgo/schema/plan"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+                        http://www.eclipse.org/virgo/schema/plan 
+                        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+
+	<artifact type="bundle" name="coderr.kerwin.osgi.demo.ds"
+		version="0.0.1.SNAPSHOT" />
+	<artifact type="bundle" name="coderr.kerwin.osgi.demo.host"
+		version="0.0.1.SNAPSHOT" />
+	<artifact type="bundle" name="coderr.kerwin.osgi.demo.web"
+		version="0.0.1.SNAPSHOT" />
+	<artifact type="bundle" name="coderr.kerwin.osgi.demo.impl1"
+		version="0.0.1.SNAPSHOT" />
+
+</plan>

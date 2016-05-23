@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/mainll"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/offbg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <ImageView android:id="@+id/iv"
+    	android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/mitu"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/abouttext" />
+    
+    <TextView android:id="@+id/abouttv" 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent" 
+	    android:text="@string/abouttext"
+	    android:textColor="@color/black"
+	    android:gravity="center"
+	    android:layout_above="@id/iv" />
+    
+	<TextView android:id="@+id/btntv" 
+	    android:layout_height="wrap_content" 
+	    android:layout_width="fill_parent"
+	    android:padding="10dp"
+	    android:textSize="20sp"
+	    android:gravity="center"
+	    android:textColor="@color/white"
+	    android:text="@string/ontext"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginBottom="10dp"
+	    android:background="@drawable/btnstyle"
+	    android:layout_alignParentBottom="true" />
+	
+	<TextView android:id="@+id/resulttv" 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent" 
+	    android:textColor="@color/white"
+	    android:text="@string/offstatus" 
+	    android:gravity="center"
+	    android:textStyle="bold"
+	    android:textSize="16sp"
+	    android:layout_above="@id/btntv" />
+	
+	<TextView android:id="@+id/labeltv" 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent" 
+	    android:textColor="@color/white"
+	    android:gravity="center"
+	    android:layout_above="@id/resulttv" />
+	
+</RelativeLayout>

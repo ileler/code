@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: coderr.kerwin.osgi.demo.ds
+Bundle-SymbolicName: coderr.kerwin.osgi.demo.ds
+Bundle-Version: 0.0.1.SNAPSHOT
+Import-Template: org.springframework.*;version="[3.0.5,4)"
+Import-Package: com.mysql.jdbc;version="5.1.6",
+ javax.naming,javax.naming.spi,javax.net,javax.net.ssl,j
+ avax.sql,javax.transaction.xa;version="[1.0.1, 2.0.0)"
+Excluded-Imports: coderr.kerwin.osgi.demo.ds

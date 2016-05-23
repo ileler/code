@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>coderr.kerwin.osgi.demo</groupId>
+		<artifactId>coderr.kerwin.osgi.demo.1</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../1/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>coderr.kerwin.osgi.demo.impl1</artifactId>
+	<packaging>jar</packaging>
+
+	<name>coderr.kerwin.osgi.demo.impl1</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.spring-library</artifactId>
+			<type>libd</type>
+		</dependency>
+		<!-- mybatis核心包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<!-- mybatis/spring包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<!-- mysql驱动包 -->
+		<dependency>
+			<groupId>com.mysql.jdbc</groupId>
+			<artifactId>com.springsource.com.mysql.jdbc</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>coderr.kerwin.osgi.demo</groupId>
+			<artifactId>coderr.kerwin.osgi.demo.api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>coderr.kerwin.osgi.demo</groupId>
+			<artifactId>coderr.kerwin.osgi.demo.model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: coderr.kerwin.osgi.demo.host
+Bundle-SymbolicName: coderr.kerwin.osgi.demo.host
+Bundle-Version: 0.0.1.SNAPSHOT
+Web-ContextPath: /demo

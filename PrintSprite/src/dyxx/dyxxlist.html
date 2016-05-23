@@ -1,0 +1,90 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="./../../Resource/StyleSheet/Default.css" path="LEAP/Resource/StyleSheet/Default.css" rel="stylesheet" type="text/css" />
+	<script src="./../../Resource/JavaScript/Base.js"  path="LEAP/Resource/JavaScript/Base.js" def></script>
+	<script src="./dyxxlist.js" path="LEAP/CSIP/dyxx/dyxxlist.js" def></script>
+	<!--@ module = dyxxlist -->
+</head>
+<DIV onresize=LEAPLG.tb(); class="lg_p2_tb lg_p2s_search" moduleversion="2" moduletype="search" modulecn="打印属性" module="iirprintproperties" modulewidth="600" moduleheight="800" autorefreshparentmodule="1" pagemodulepath="LEAP/CSIP/dyxx/dyxxlist.html" pagemodule="dyxxlist" pagemodulecn="打印信息列表" modules="[{'name':'dyxxinfo','cn':'打印信息','hidemsg':null,'isinfo':true}]">
+	<DIV style="HEIGHT: 45px" onresize=LEAPLG.tb_layout(0); class="lg_p2_tb_top lgsearchpanel">
+		<DIV class=lgsearchcon>
+			<SPAN class=lgia>
+				<LABEL class=lgiatext>对象名</LABEL>
+				<INPUT class=lgiact check="maxlen:100" ht="input" mdcn="对象名" mdtype="text" bt="text" md="objname">
+			</SPAN>
+			<SPAN class=lgia>
+				<LABEL class=lgiatext>键</LABEL>
+				<INPUT class=lgiact check="maxlen:100" ht="input" mdcn="键" mdtype="text" bt="text" md="objkey">
+			</SPAN>
+			<SPAN class=lgia>
+				<LABEL class=lgiatext>值</LABEL>
+				<INPUT class=lgiact check="maxlen:100" ht="input" mdcn="值" mdtype="text" bt="text" md="objvalue">
+			</SPAN>
+			<SPAN class="lgia lgiaselect">
+				<LABEL class=lgiatext>是否粗体</LABEL>
+				<DIV class="select lgiact" check="isint:true,maxlen:7" style="DISPLAY: inline" ct="select" md="isbold" bt="select" mdtype="select" mdcn="是否粗体" search="11" code="lbcpboolean" dynacode="1">
+					<DIV class="lg_p_lr_right select_drop selectdropout" ctf="select_drop">
+					</DIV>
+					<DIV class="lg_p_lr_fill input_fill">
+						<DIV class="lg_p_lr_fill_c input_fill_c">
+							<INPUT class="selectbtn ellipsis " type=button ctf="selectbtn">
+						</DIV>
+					</DIV>
+					<DIV class=select_items style="WIDTH: 100%" ctf="select_items" sizset="0">
+						<DIV>
+							<A href="javascript:" ctf="select_item" value="">&nbsp;</A>
+						</DIV>
+					</DIV>
+				</DIV>
+			</SPAN>
+		</DIV>
+		<DIV class=lgbtncon>
+			<A class="lgimgbtn lgimg_search" href="javascript:" ut="btn_search" ht="button" bindevents="click=innerSearch">查询</A>
+			<A class="lgimgbtn lgimg_reset" href="javascript:" ut="btn_reset" ht="button" bindevents="click=innerReset">重置</A>
+			<A class="lgimgbtn lgimg_add" href="javascript:" ut="btn_add" ht="button">新增</A>
+			<A class="lgimgbtn lgimg_export1" style="width:100px" href="javascript:" ut="btn_print" ht="button" bindevents="click=dyxx">打印配置</A>
+		</DIV>
+	</DIV>
+	<DIV class="lg_p2_tb_bottom lgresultpanel">
+		<DIV style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: hidden" onresize=LEAPLG.bt(); class="lg_p2_bt table_border table" ut="list" ct="table" bindevents="searchMethod=innerRefreshPage" autosize="1">
+			<DIV style="OVERFLOW: auto" onscroll=LEAPLG.table_scrl(); onresize=LEAPLG.table_scrl(); class=lg_p2_bt_top>
+				<TABLE style="WIDTH: 100%; FLOAT: left" border=0 cellSpacing=0>
+					<THEAD ctf="table_thead">
+						<TR ctf="table_thead_tr">
+							<TH style="WIDTH: 50px" ctf="table_header" bt="table_sn" md="status" sncol="1">序号</TH>
+							<TH style="WIDTH: 100px" ctf="table_header" bt="text" md="objname">对象名</TH>
+							<TH style="WIDTH: 100px" ctf="table_header" bt="text" md="objkey">键</TH>
+							<TH style="WIDTH: 400px" ctf="table_header" bt="text" md="objvalue">值</TH>
+							<TH style="WIDTH: 80px" ctf="table_header" bt="text" md="objx">X值</TH>
+							<TH style="WIDTH: 80px" ctf="table_header" bt="text" md="objy">Y值</TH>
+							<TH style="WIDTH: 100px" ctf="table_header" bt="text" md="font">字体</TH>
+							<TH style="WIDTH: 50px" ctf="table_header" bt="text" md="isbold" code="lbcpboolean">是否粗体</TH>
+							<TH style="WIDTH: 50px" ctf="table_header" bt="text" md="fontsize">字体大小</TH>
+							<TH style="WIDTH: 50px" ctf="table_header" bt="text" md="width">宽度</TH>
+							<TH style="WIDTH: 120px" ctf="table_header" tpo="查看:1|修改:2|删除:3" tpoal="view|modify|delete">操作</TH>
+						</TR>
+					</THEAD>
+					<TBODY ctf="table_tbody">
+					</TBODY>
+				</TABLE>
+			</DIV>
+			<DIV style="HEIGHT: 22px" onresize=LEAPLG.bt_layout(); class="lg_p2_bt_bottom table_bottom_border">
+				<DIV style="TEXT-ALIGN: left; MARGIN-TOP: 1px; FLOAT: left">
+					<INPUT style="DISPLAY: none" class=page_button value=导出 type=button name=button ctf="table_export">
+					<INPUT style="DISPLAY: none" class=page_button value=属性 type=button name=button ctf="table_props">
+				</DIV>
+				<DIV style="TEXT-ALIGN: right; FLOAT: right">
+					<INPUT class=page_button value=首页 type=button ctf="table_page_first">
+					<INPUT class=page_button value=上一页 type=button ctf="table_page_pre">
+					<INPUT class=page_button value=下一页 type=button ctf="table_page_next">
+					<INPUT class=page_button value=尾页 type=button ctf="table_page_last">
+					<FONT ctf="table_page_info">&nbsp; 0/0页 0/0条 13条/页</FONT>
+					<INPUT class=table_input size=4 ctf="table_page_in">
+					<INPUT class=page_button value=跳转 type=button ctf="table_page_goto">
+				</DIV>
+			</DIV>
+			<IMG style="DISPLAY: none" onerror=LEAPLG.bt_img(0); src="data:image:png,base64">
+		</DIV>
+	</DIV>
+	<IMG style="DISPLAY: none" onerror=LEAPLG.tb_img(0); src="data:image:png,base64">
+</DIV>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<string name="appshortname">Wi-ADB</string>
+	<string name="appfullname">WirelessAdb</string>
+	<string name="ontext">Turn ON</string>
+	<string name="offtext">Turn OFF</string>
+	<string name="oningtext">Turning ON</string>
+	<string name="offingtext">Turning OFF</string>
+	<string name="offstatus">WirelessAdb is off</string>
+	<string name="onstatus">WirelessAdb is on, from your computer run:</string>
+	<string name="abouttext">You can enable or disable the wireless connection ADB interface by pressing the bottom button.</string>
+
+	<string name="button_close">Close</string>
+	<string name="button_exit">Exit</string>
+	<string name="button_connect_wifi">Connect WiFi</string>
+	<string name="button_activate_wifi">Activate WiFi</string>
+
+	<string name="no_root_title">Not Root!</string>
+	<string name="no_root">Ops! Sorry, but your kernel does not have all necessary features for running this application, you need rooted phone.</string>
+	
+	<string name="error_title">Error!</string>
+	<string name="error">The program error, click the close button to exit the program.</string>
+
+	<string name="no_wifi_title">No Wireless!</string>
+	<string name="no_wifi">Ops! Sorry, but WiFi is off, you need the active WiFi to use WirelessAdb.</string>
+	<string name="disconnect_wifi">Ops! Sorry, but WiFi is disable connect, you need the connect WiFi to use WirelessAdb.</string>
+
+	<string name="Turning_on">Turning on wireless connection</string>
+	<string name="Turning_off">Turning off wireless connection</string>
+
+	<string name="Turning_on_wifi">Turning on WiFi</string>
+	<string name="Turning_off_wifi">Turning off WiFi</string>
+
+	<string name="exitconfirm">Press again to exit the program</string>
+	
+</resources>

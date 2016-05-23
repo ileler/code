@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/mainly"
+	android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/background1"
+    android:layout_height="match_parent">
+	
+	<LinearLayout
+	    android:id="@+id/toply"
+	    android:orientation="horizontal"
+	    android:baselineAligned="false"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true">
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1">
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center" android:textSize="12sp" android:text="@string/high_score"/>
+			<TextView android:id="@+id/highscore" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center" android:textSize="30sp" android:text="@string/high_score_value"/>
+		</LinearLayout>
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1">
+			<TextView android:id="@+id/currhigh" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:textSize="70sp" android:text="@string/curr_high_value"/>
+		</LinearLayout>
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1">
+			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center" android:textSize="12sp" android:text="@string/curr_score"/>
+			<TextView android:id="@+id/currscore" android:layout_width="fill_parent" android:layout_gravity="center" android:layout_height="wrap_content" android:gravity="center" android:textSize="30sp" android:text="@string/curr_score_value"/>
+		</LinearLayout>
+		
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/bottomly"
+	    android:orientation="vertical"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true">
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/menuly"
+	    android:orientation="horizontal"
+	    android:baselineAligned="false"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/bottomly">
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1">
+			<TextView android:id="@+id/prevstepBtn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:textSize="24sp" android:text="@string/prevstep"/>
+		</LinearLayout>
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1">
+			<TextView android:id="@+id/settingBtn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:textSize="24sp" android:text="@string/setting"/>
+		</LinearLayout>
+	    
+	    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1">
+			<TextView android:id="@+id/restartBtn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:textSize="24sp" android:text="@string/restart"/>
+		</LinearLayout>
+		
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/viewly"
+	    android:orientation="vertical"
+	    android:layout_gravity="center"
+	    android:layout_below="@id/toply"
+	    android:layout_above="@id/menuly"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	</LinearLayout>
+	
+</RelativeLayout>

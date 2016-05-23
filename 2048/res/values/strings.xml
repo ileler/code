@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">2048增强版</string>
+    <string name="header">2048</string>
+    <string name="menu">···</string>
+    <string name="about">Kerwin</string>
+
+    <string name="high_score">最高分</string>
+    <string name="score">分数</string>
+    <string name="instructions">滑动2 + 2 = 4最终到2048</string>
+    <string name="you_win">你赢啦</string>
+    <string name="game_over">游戏结束</string>
+    <string name="go_on">点击继续</string>
+    <string name="for_now">现在</string>
+    <string name="endless">“无限”模式</string>
+</resources>

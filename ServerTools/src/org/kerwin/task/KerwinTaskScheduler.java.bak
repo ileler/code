@@ -1,0 +1,197 @@
+package org.kerwin.task;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public final class KerwinTaskScheduler {
+	
+	private static Timer timer;
+	private static boolean isStart;
+	
+	private static Map<String,Timer> cts;
+	private static Map<String,KerwinTasker> kts;
+	private KerwinTaskScheduler(){}
+	
+	static{
+		timer = new Timer("KerwinTasker");
+		cts = new Hashtable<String,Timer>();
+		kts = new Hashtable<String,KerwinTasker>();
+	}
+	
+	public static synchronized void addKerwinTasker(KerwinTasker kt){
+		kts.put(kt.getId(), kt);
+		isStart = false;
+		exec();
+		System.out.println("[KerwinTaskScheduler][addKerwinTasker:"+kt.getName()+"]["+KerwinTasker.getDatetime(new Date())+"]");
+	}
+	
+	public static synchronized void delKerwinTasker(String id){
+		if(id == null || id.isEmpty())	return;
+		KerwinTasker kt = kts.remove(id);
+		Timer t = cts.get(id);
+		if(t != null){
+			t.purge();
+			t.cancel();
+			cts.remove(id);
+		}
+		System.out.println("[KerwinTaskScheduler][delKerwinTasker:"+kt.getName()+"]["+KerwinTasker.getDatetime(new Date())+"]");
+	}
+	
+	public static synchronized void updateKerwinTasker(KerwinTasker kt){
+		delKerwinTasker(kt.getId());
+		addKerwinTasker(kt);
+		System.out.println("[KerwinTaskScheduler][updateKerwinTasker:"+kt.getName()+"]["+KerwinTasker.getDatetime(new Date())+"]");
+	}
+	
+	public static synchronized void exec(){
+		if(isStart)	return; isStart = true;
+		System.out.println("[KerwinTaskScheduler][start]");
+		timer.purge();
+		timer.cancel();
+		timer = new Timer("KerwinTasker");
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if(kts == null || kts.size() < 1)	return;
+				System.out.println("[KerwinTaskScheduler][RunningTaskerCount:"+cts.size()+"]["+KerwinTasker.getDatetime(new Date())+"]");
+				for(final KerwinTasker kt : kts.values()){
+					synchronized(cts){
+						if(cts.keySet().contains(kt.getId()))	continue;
+						cts.put(kt.getId(),new Timer(kt.getId()));
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								Date nextExecTime = null;
+								try {
+									if((nextExecTime = kt.calculateNextExecTime()) == null){
+										throw new Exception("nextExecTime is null");
+									}
+								} catch (final Exception e1) {
+									new Thread(new Runnable() {
+										@Override
+										public void run() {
+											kt.setLastExecBeginTime(new Date());
+											kt.setLastExecTime(new Date());
+											kt.setUpdatetime(new Date());
+											kt.setExecCount(kt.getExecCount()+1);
+											kt.setLastExecStatus(e1.getMessage());
+											kt.setLastExecEndTime(new Date());
+											kt.updateKerwinTasker();
+										}
+									}).start();
+									e1.printStackTrace();
+									cts.remove(kt.getId());
+									updateKerwinTasker(kt);
+									return;
+								}
+								kt.setNextExecTime(nextExecTime);
+								kt.updateKerwinTasker();
+								cts.get(kt.getId()).schedule(new TimerTask() {
+									@Override
+									public void run() {
+										System.out.println("[KerwinTaskScheduler]["+kt.getName()+" is start]["+KerwinTasker.getDatetime(new Date())+"]");
+										new Thread(new Runnable() {
+											@Override
+											public void run() {
+												try {
+													kt.setNextExecTime(kt.calculateNextExecTime());
+												} catch (Exception e) {
+													kt.setNextExecTime(null);
+													e.printStackTrace();
+												}
+												kt.setLastExecBeginTime(new Date());
+												kt.setLastExecTime(new Date());
+												kt.setUpdatetime(new Date());
+												kt.setExecCount(kt.getExecCount()+1);
+												kt.setLastExecStatus("Running...");
+												kt.updateKerwinTasker();
+											}
+										}).start();
+										String msg = null;
+										String className = kt.getTaskerClass();
+										if(className != null && !className.isEmpty()){
+											try {
+												Class<?> taskerClass = ClassLoader.getSystemClassLoader().loadClass(className);
+												List<Class<?>> interfaces = Arrays.asList(taskerClass.getInterfaces());
+												if(interfaces == null || interfaces.size() < 1 || !interfaces.contains(Runnable.class)){
+													msg = "taskerClass hasn't implements [Runnable]";
+												}else{
+													Method runMethod = taskerClass.getMethod("run", new Class[0]);
+													Object taskerObject = taskerClass.newInstance();
+													runMethod.invoke(taskerObject, new Object[0]);
+													msg = "success";
+												}
+											} catch (ClassNotFoundException e) {
+												msg = "taskerClass not found";
+											} catch (SecurityException e) {
+												msg = e.getMessage();
+											} catch (NoSuchMethodException e) {
+												msg = e.getMessage();
+											} catch (InstantiationException e) {
+												msg = e.getMessage();
+											} catch (IllegalAccessException e) {
+												msg = e.getMessage();
+											} catch (IllegalArgumentException e) {
+												msg = e.getMessage();
+											} catch (InvocationTargetException e) {
+												msg = e.getMessage();
+											}
+										}else{
+											msg = "taskerClass is null";
+										}
+										final String _msg = msg;
+										new Thread(new Runnable() {
+											@Override
+											public void run() {
+												kt.setLastExecEndTime(new Date());
+												kt.setUpdatetime(new Date());
+												kt.setLastExecStatus(_msg);
+												kt.updateKerwinTasker();
+											}
+										}).start();
+										System.out.println("[KerwinTaskScheduler]["+kt.getName()+" is end]["+KerwinTasker.getDatetime(new Date())+"]");
+										cts.remove(kt.getId());
+										updateKerwinTasker(kt);
+									}
+								},nextExecTime);
+							}
+						}).start();
+					}
+				}
+			}
+		}, 1L);
+		Timer tt = new Timer();
+		tt.schedule(new TimerTask() {
+			@Override
+			public void run(){
+				Set<String> ks = cts.keySet();
+				Iterator<String> iter = ks.iterator();
+				System.out.println("#####cts stt#####");
+				while(iter.hasNext()){
+					String key = iter.next();
+					System.out.println("cts:"+key+"->"+cts.get(key));
+				}
+				System.out.println("#####cts end#####");
+				ks = kts.keySet();
+				iter = ks.iterator();
+				System.out.println("#####kts stt#####");
+				while(iter.hasNext()){
+					String key = iter.next();
+					KerwinTasker value = kts.get(key);
+					System.out.println("kts:"+key+"->execTime:"+value.getExecTime()+",lastExecTime:"+KerwinTasker.getDatetime(value.getLastExecTime())+",nextExecTime:"+KerwinTasker.getDatetime(value.getNextExecTime())+"["+KerwinTasker.getDatetime(new Date())+"]");
+				}
+				System.out.println("#####kts end#####");
+			}
+		},1L,5000L);
+	}
+	
+}
